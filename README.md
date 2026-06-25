@@ -1,10 +1,10 @@
-# 📡 Telco Customer Churn Prediction
+#  Telco Customer Churn Prediction
 
 A complete end-to-end machine learning project for predicting customer churn using the **Telco Customer Churn dataset**. The project covers exploratory data analysis, data preprocessing, model building with Random Forest, cross-validation, ROC-AUC evaluation, and customer segmentation using K-Means clustering.
 
 ---
 
-## 📁 Dataset
+##  Dataset
 
 - **File:** `Telco_customer_churn.xlsx`
 - **Target Variable:** `Churn Value` (1 = Churned, 0 = Retained)
@@ -12,7 +12,7 @@ A complete end-to-end machine learning project for predicting customer churn usi
 
 ---
 
-## 🔧 Libraries Used
+##  Libraries Used
 
 ```python
 pandas, numpy, matplotlib, seaborn
@@ -21,7 +21,7 @@ sklearn (RandomForestClassifier, KMeans, StandardScaler, train_test_split, metri
 
 ---
 
-## 📊 Step 1: Exploratory Data Analysis (EDA)
+##  Step 1: Exploratory Data Analysis (EDA)
 
 The EDA phase explores the distribution and relationships of key features with respect to churn.
 
@@ -38,7 +38,7 @@ The EDA phase explores the distribution and relationships of key features with r
 
 ---
 
-## 🧹 Step 2: Data Cleaning
+##  Step 2: Data Cleaning
 
 - **`Total Charges` conversion** — Column was in object format; converted to numeric using `pd.to_numeric(errors='coerce')`.
 - **Missing values** — Null values in `Total Charges` were found to correspond to customers with 0 tenure months; filled with `0`.
@@ -54,7 +54,7 @@ drop_columns = [
 
 ---
 
-## 🔢 Step 3: Encoding
+##  Step 3: Encoding
 
 - **One-Hot Encoding** applied to all categorical columns using `pd.get_dummies(df, drop_first=True)`.
 - This converts string categories (e.g., Contract type, Internet Service) into binary numeric columns.
@@ -62,7 +62,7 @@ drop_columns = [
 
 ---
 
-## 🎯 Step 4: Feature Selection
+##  Step 4: Feature Selection
 
 - **X (Features):** All columns except `Churn Value`.
 - **Y (Target):** `Churn Value` (binary: 0 or 1).
@@ -83,7 +83,7 @@ dropping = [
 
 ---
 
-## ✂️ Step 5: Train and Test Split
+##  Step 5: Train and Test Split
 
 ```python
 X_train, X_test, Y_train, Y_test = train_test_split(
@@ -96,7 +96,7 @@ X_train, X_test, Y_train, Y_test = train_test_split(
 
 ---
 
-## 🌲 Step 6: Random Forest — Three Approaches
+##  Step 6: Random Forest — Three Approaches
 
 ### Baseline Model
 
@@ -108,7 +108,7 @@ Evaluated using `accuracy_score`, `confusion_matrix`, and `classification_report
 
 ---
 
-### Approach i — Handling Class Imbalance
+### Approach 1 — Handling Class Imbalance
 
 ```python
 rf_balanced = RandomForestClassifier(
@@ -120,7 +120,7 @@ The dataset has more retained customers than churned ones. Using `class_weight='
 
 ---
 
-### Approach ii — Hyperparameter Tuning
+### Approach 2 — Hyperparameter Tuning
 
 ```python
 rf_tunned = RandomForestClassifier(
@@ -139,7 +139,7 @@ Results were sorted by **Recall** (priority) then **Accuracy** to find the best 
 
 ---
 
-### Approach iii — Feature Importance Analysis
+### Approach 3 — Feature Importance Analysis
 
 ```python
 feature_importance = pd.DataFrame({
@@ -154,7 +154,7 @@ feature_importance = pd.DataFrame({
 
 ---
 
-## 🔁 Step 7: Cross-Validation
+##  Step 7: Cross-Validation
 
 Cross-validation was implemented (commented out in the notebook, available for use):
 
@@ -174,7 +174,7 @@ cv_recall   = cross_val_score(final_rf, X, Y, cv=5, scoring='recall')
 
 ---
 
-## 📈 Step 8: ROC – AUC Curve
+##  Step 8: ROC – AUC Curve
 
 ```python
 from sklearn.metrics import roc_auc_score, roc_curve
@@ -190,7 +190,7 @@ fpr, tpr, threshold = roc_curve(Y_test, churn_prob)
 
 ---
 
-## 🗂️ Step 9: Customer Segmentation using K-Means (with Churn Prediction)
+##  Step 9: Customer Segmentation using K-Means (with Churn Prediction)
 
 ### Segmentation Features
 
@@ -238,7 +238,7 @@ A WCSS (Within-Cluster Sum of Squares) vs K plot was drawn to identify the elbow
 
 ---
 
-## 📉 Step 10: Data Visualisation
+##  Step 10: Data Visualisation
 
 All visualisations were created using **Matplotlib** and **Seaborn**:
 
@@ -258,7 +258,7 @@ All visualisations were created using **Matplotlib** and **Seaborn**:
 
 ---
 
-## 🚀 How to Run
+##  How to Run
 
 1. Clone or download this repository.
 2. Place `Telco_customer_churn.xlsx` in the same directory as the notebook.
@@ -271,7 +271,7 @@ All visualisations were created using **Matplotlib** and **Seaborn**:
 
 ---
 
-## 📌 Key Takeaways
+##  Key Takeaways
 
 - Customers on **month-to-month contracts** with **higher monthly charges** and **shorter tenure** are the most likely to churn.
 - Using `class_weight='balanced'` significantly improves **recall for churned customers**.
